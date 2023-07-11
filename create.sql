@@ -6,7 +6,7 @@ drop table if exists students;
 create table courses(
     id integer primary key,
     title text not null unique,
-    date_created text default CURRENT_TIMESTAMP,
+    date_created text default CURRENT_TIMESTAMP not null,
     date_updated text,
     instructor_id integer,
     foreign key(instructor_id) references instructors(id)
@@ -37,7 +37,7 @@ create table students(
 create table course_registrations(
     student_id integer not null,
     course_id integer not null,
-    date_registered text not null,
+    date_registered text not null default CURRENT_TIMESTAMP,
     foreign key(course_id) references courses(id),
     foreign key(student_id) references students(id)
 );
