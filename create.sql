@@ -1,8 +1,3 @@
-drop table if exists course_registrations;
-drop table if exists courses;
-drop table if exists instructors;
-drop table if exists students;
-
 create table courses(
     id integer primary key,
     title text not null unique,
@@ -18,8 +13,8 @@ CREATE TRIGGER update_date_updated UPDATE OF title ON courses
 
 Create table instructors(
     id integer primary key,
-    fname text not null,
-    middle_initial text,
+    fname text not null check(length(fname)>2 and length(fname)<50),
+    middle_initial text check(length(middle_initial)==1),
     lname text not null,
     age integer CHECK(age>=18),
     tenured integer check(tenured==0 or tenured==1) default 0
